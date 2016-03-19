@@ -1,0 +1,55 @@
+---
+layout: post
+title: Hello, Elm!
+draft: true
+---
+
+I've been curious about the [Elm][elm] programming language ever since I saw a [talk][clojurewesttalk] on functional reactive programming at Clojure/West last year. Since I mostly do backend development for work I hadn't had a good opportunity to try it out. I finally sat down a couple weekends ago to try my hand at a simple game. My progress was shockingly fast. I'm impressed with the Elm documentation and in particular the [examples][examples] provided on the language's website, which made getting started with it perhaps the smoothest start I've had with any programming language, let alone with a new programming paradigm.
+
+Elm presents examples incredibly well. Take a look, if you haven't already -- a simple one is the [mouse position signal][mousepos]. The example appears on one side of the page, juxtaposed with the code powering it on the other side in an editor pane. You can hot swap or recompile code in order to experiment frictionlessly with what's being presented. The degree of effort that went into the presentation here is something I don't think I've ever seen for a programming language's website, and it made the path of starting out with Elm smooth and fun.
+
+Coming from Haskell, I expected Elm to have a similarly heavyweight (and powerful) type system, but I found on the contrary that the type system was helpful without getting in my way. There are a couple good design choices that help it stay streamlined and lightweight. First, the abstraction of a signal -- a value that changes over time -- provides a window to the outside world in place of Haskell's monad-heavy implementations of IO, and Elm's elegant record syntax provides an 80%/20% solution for the abstraction problems that Haskell solves with higher-kinded types and typeclasses. (Elm's type system is not as powerful as Haskell's without these features, but I found myself happy to let them go, and language creator Evan Czaplicki has clearly thought through these features of the language carefully, with an eye towards simplicity and clean language design. For an example of the kinds of discussions that go into this, see [this][HKPdiscussion] discussion of adding higher-kinded polymorphism or typeclasses into Elm.)
+
+The Elm architecture is worth a brief mention. It's not a feature of the language per se, but it is one of the things that makes Elm a joy to work with. The basic idea is that your code is divded into three parts:
+
+- the MODEL, which defines all the datatypes you need for your app (just data)
+- the UPDATE, which takes your model and some inputs and returns an updated version of the model (this is a pure function)
+- the VIEW, which takes your model and converts it into HTML elements (another pure function)
+
+You wire these together by defining your input as a set of Signals. For a game, for example, the main Signal looks like this:
+
+~~~
+delta = Signal.map Time.inSeconds (Time.fps 35)
+
+input : Signal Input
+input =
+  Signal.sampleOn delta <|
+    Signal.map4 Input
+      delta
+      Keyboard.enter
+      Keyboard.space
+      Keyboard.arrows
+~~~
+
+Here, Input is just a constructor that builds an Input data structure from the signals `delta` (which delivers a series of time deltas targeting the given number of frames per second -- 35, in my case) and the three `Keyboard` signals (which change when the state of those keys -- up or down -- changes.
+
+Defining this was the trickiest part of the program, and there are still a few warts in it (the way I use `delta` both to sample the other signals and as part of the `Input` structure isn't quite right, I think) but it comes with a major benefit. It's now possible to wire together my nice, pure `update` and `view` functions like this:
+
+~~~
+gameState : Signal Game
+gameState = Signal.foldp update newGame input
+
+main = Signal.map2 view Window.dimensions gameState
+~~~
+`newGame` creates an empty Game data structure, while `Signal.foldp` creates what's called a "past-dependent" signal -- essentially the game loop, stepping the state forward through time as the `input` signal changes. It took me a little while to get my head around this with the help of Elm's examples, but I now find it incredibly elegant.
+
+The bottom line is Elm made it fun to make things. Over the course of a few hours, I was able to create a bare-bones Asteroids clone that I've tinkered with over the past couple of weeks to refine. You can see it [here](/asteroids/) and the code is [on Github][asteroids-github]. Aside from a bit of a struggle to generate random numbers (more on that in another post, maybe).
+
+[elm]: http://elm-lang.org/
+[clojurewesttalk]: https://www.youtube.com/watch?v=rOKOCAkHNYw
+[examples]: http://elm-lang.org/examples
+[mousepos]: http://elm-lang.org/examples/mouse-position
+[HKPdiscussion]: https://github.com/elm-lang/elm-compiler/issues/1039
+[asteroids-github]: https://github.com/loganmhb/asteroids
+
+

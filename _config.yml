@@ -1,0 +1,13 @@
+# Site settings
+title: bckly
+email: logan.buckley@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+  "If a thing is worth doing, it is worth doing badly."
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://bckly.com" # the base hostname & protocol for your site
+twitter_username: loganmhb
+github_username:  loganmhb
+
+# Build settings
+markdown: kramdown
+highlighter: rouge

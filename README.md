@@ -1,2 +1,0 @@
-loganmhb.github.io
-==================
