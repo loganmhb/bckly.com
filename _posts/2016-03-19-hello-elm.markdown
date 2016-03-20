@@ -18,7 +18,7 @@ The Elm architecture is worth a brief mention. It's not a feature of the languag
 
 You wire these together by defining your input as a set of Signals. For a game, for example, the main Signal looks like this:
 
-~~~
+```elm
 delta = Signal.map Time.inSeconds (Time.fps 35)
 
 input : Signal Input
@@ -29,18 +29,19 @@ input =
       Keyboard.enter
       Keyboard.space
       Keyboard.arrows
-~~~
+```
 
 Here, Input is just a constructor that builds an Input data structure from the signals `delta` (which delivers a series of time deltas targeting the given number of frames per second -- 35, in my case) and the three `Keyboard` signals (which change when the state of those keys -- up or down -- changes.
 
 Defining this was the trickiest part of the program, and there are still a few warts in it (the way I use `delta` both to sample the other signals and as part of the `Input` structure isn't quite right, I think) but it comes with a major benefit. It's now possible to wire together my nice, pure `update` and `view` functions like this:
 
-~~~
+```elm
 gameState : Signal Game
 gameState = Signal.foldp update newGame input
 
 main = Signal.map2 view Window.dimensions gameState
-~~~
+```
+
 `newGame` creates an empty Game data structure, while `Signal.foldp` creates what's called a "past-dependent" signal -- essentially the game loop, stepping the state forward through time as the `input` signal changes. It took me a little while to get my head around this with the help of Elm's examples, but I now find it incredibly elegant.
 
 The bottom line is Elm made it fun to make things. Over the course of a few hours, I was able to create a bare-bones Asteroids clone that I've tinkered with over the past couple of weeks to refine. You can see it [here](/asteroids/) and the code is [on Github][asteroids-github]. Aside from a bit of a struggle to generate random numbers (more on that in another post, maybe).
