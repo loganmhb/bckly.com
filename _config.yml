@@ -11,3 +11,9 @@ github_username:  loganmhb
 # Build settings
 markdown: kramdown
 highlighter: rouge
+
+permalink: none
+
+kramdown:
+  input: GFM
+  highlighter: rouge
