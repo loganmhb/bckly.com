@@ -6,19 +6,19 @@ tags: elm
 date: March 21, 2016
 ---
 
-I've been curious about the [Elm][elm] programming language ever since I saw a [talk][clojurewesttalk] on functional reactive programming at Clojure/West last year. Since I mostly do backend development for work I hadn't had a good opportunity to try it out. I finally sat down a couple weekends ago to try my hand at a simple game. I was shocked at how quickly I was able to make progress. I'm impressed with the Elm documentation and in particular the [examples][examples] provided on the language's website, which made my experiments with Elm the smoothest start I've had with any programming language, let alone with a new programming paradigm like FRP.
+I've been curious about the [Elm][elm] programming language ever since I saw a [talk][clojurewesttalk] on functional reactive programming at Clojure/West last year. Since I mostly do backend development for work I havn't had a good opportunity to try it out. A couple weekends ago I finally decided to try my hand at learning the language by building a simple game, and I was shocked at how quickly I was able to make progress. I'm impressed with the Elm documentation and in particular the [examples][examples] provided on the language's website, which made my experiments with Elm the smoothest start I've had with any programming language, let alone with a new programming paradigm like FRP.
 
-Elm presents examples incredibly well. Take a look, if you haven't already -- a simple one is the demonstration of the [mouse position signal][mousepos]. The example appears on one side of the page, juxtaposed with the code powering it on the other side in an editor pane. You can hot swap or recompile code in order to experiment frictionlessly with what's being presented. The care that clearly went into that presentation is something I don't think I've ever seen for a programming language's website, and it made the language much more approachable.
+Elm presents examples incredibly well -- a good simple one is the demonstration of the [mouse position signal][mousepos]. The example appears on one side of the page, juxtaposed with the code powering it on the other side in an in-browser editor. You can hot swap or recompile code in order to experiment frictionlessly with the example. I don't think I've ever seen tutorials or examples on a programming language's website that have had as much thought and care as clearly went into Elm's.
 
-Coming from a little bit of experience with Haskell, which inspired much of Elm's syntax, I expected Elm to have a similarly heavyweight (and powerful) type system. Haskell's type system, if you haven't used it, detects plenty of bugs but also throws up plenty of roadblocks. Adding IO to a function, for example, requires changing its type signature and also the type signatures of every function calling it.
+Coming from a little bit of experience with Haskell, which inspired Elm's syntax, I expected Elm to have a similarly heavyweight (and powerful) type system. Haskell's type system, if you haven't used it, provides powerful gurantees and catches lots of bugs but also tends to get cumbersome during computations involving side effects, IO, or control flow structures like error handling. Adding IO to a function, for example, requires changing its type signature and also the type signatures of every function calling it.
 
-By contrast, the Elm type system was helpful without getting in my way. There are a couple good design choices that help it stay streamlined and lightweight. First, Elm dispenses with monads. Instead, the abstraction of a signal -- a value that changes over time -- provides a clean interface to the outside world. Meanwhile, Elm's elegant record syntax and record-based polymorphism provides an 80%/20% solution for the abstraction problems that Haskell solves with higher-kinded types and typeclasses. (Elm's type system is not as powerful as Haskell's without these features, but I found myself happy to let them go, and language creator Evan Czaplicki has clearly thought through these features of the language carefully and with an eye towards simplicity and clean language design. For an example of the kinds of discussions that go into this, see [this][HKPdiscussion] discussion of adding higher-kinded polymorphism or typeclasses into Elm.)
+By contrast, the Elm type system provided a lot of the same help without getting in the way nearly as much. There are a couple good design choices that help it stay streamlined and lightweight. First, Elm dispenses with the monads that dominate idiomatic Haskell. Instead, the abstraction of a signal -- a value that changes over time -- provides a clean interface from a purely-fucntional to the outside world. Meanwhile, Elm's elegant record syntax and record-based polymorphism solve many of the abstraction problems that Haskell solves by deploying higher-kinded types and typeclasses. Elm's type system is not as powerful as Haskell's without HKTs and typeclasses, but I found myself happy to let them go for the time being. Language creator Evan Czaplicki has clearly thought through these features of the language carefully and with an eye towards simplicity and clean language design. For an example of the kinds of discussions that go into this, see [this][HKPdiscussion] discussion of adding higher-kinded polymorphism or typeclasses into Elm.
 
 The Elm architecture is worth a brief mention as well. It's not a feature of the language per se, but it is one of the things that makes Elm a joy to work with. The basic idea is that your code is divded into three parts:
 
-- the MODEL, which defines all the datatypes you need for your app (just data)
-- the UPDATE, which takes your model and some inputs and returns an updated version of the model (this is a pure function)
-- the VIEW, which takes your model and converts it into HTML elements (another pure function)
+- the model, which defines all the datatypes you need for your app (just data)
+- the update, which takes your model and some inputs and returns an updated version of the model (this is a pure function)
+- the view, which takes your model and converts it into HTML elements (another pure function)
 
 You wire these together by defining your inputs and outputs as Signals. For my game, for example, the primary signal looks like this:
 
@@ -35,9 +35,9 @@ input =
       Keyboard.arrows
 ```
 
-Here, Input is just a constructor that builds an Input data structure from the signals `delta` (which delivers a series of time deltas targeting the given number of frames per second -- 35, in my case) and the three `Keyboard` signals (which change when the state of those keys -- up or down -- changes.
+Here, Input is a constructor that builds an Input data structure from the signals `delta` (which delivers a series of time deltas targeting the given number of frames per second -- 35, in my case) and the three `Keyboard` signals (which change when the state of those keys -- up or down -- changes.
 
-Defining this was the trickiest part of the program, and there are still a few warts in it (more on that in anothe post) but it comes with a major benefit. It's now possible to wire together the pure `update` and `view` functions like this:
+Defining this was the trickiest part of the program, and there are still a few warts in it (more on that in another post) but it comes with a major benefit. It's now possible to wire together the pure `update` and `view` functions like this:
 
 ```elm
 gameState : Signal Game
@@ -46,9 +46,9 @@ gameState = Signal.foldp update newGame input
 main = Signal.map2 view Window.dimensions gameState
 ```
 
-`newGame` creates an empty Game data structure, while `Signal.foldp` creates what's called a "past-dependent" signal -- essentially the game loop, stepping the state forward through time as the `input` signal changes. It took me a little while to get my head around this with the help of Elm's examples, but I now find it incredibly elegant.
+`newGame` creates an empty Game data structure, while `Signal.foldp` creates what's called a "past-dependent" signal -- essentially the game loop, stepping the state forward through time as the `input` signal changes. It took me a little while to get my head around this with the help of Elm's examples, but I now find it elegant and satisfying code.
 
-The bottom line is Elm made it fun to make things. Over the course of a few hours, I was able to create a bare-bones Asteroids clone that I've tinkered with over the past couple of weeks to refine. You can see it [here](/asteroids/) and the code is [on Github][asteroids-github]. Aside from a bit of a struggle to generate random numbers (more on that in another post, maybe).
+The bottom line is Elm made it fun to make things. Over the course of a few hours, I was able to create a bare-bones Asteroids clone that I've tinkered with over the past couple of weeks to refine. You can see it [here](/asteroids/) and the code is [on Github][asteroids-github].
 
 [elm]: http://elm-lang.org/
 [clojurewesttalk]: https://www.youtube.com/watch?v=rOKOCAkHNYw
