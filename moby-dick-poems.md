@@ -138,4 +138,4 @@ the best of wives she is
 
 drawing nigh to drowning
 
-[algo_poems_post]: /code/algorithmic-poetry.html
+[algo_poems_post]: /code/algorithmic-poems.html

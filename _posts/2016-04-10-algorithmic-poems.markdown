@@ -132,4 +132,4 @@ Cool! From there, I took over, applying some simple rules to pull out phrases fr
 The results are [here][mb_poems]. Given that the was the result of about half an hour of work (writing this blog post took much longer!) I'm excited to refine the method. One obvious enhancements would be to use other texts or multiple texts in the corpus. Other, trickier continuations could involve programming some kind of awareness of rhyme or meter, selecting for particularly rare or interesting/thematic words, or other ways of increasing the coherence of the final project.
 
 [markov]: https://en.wikipedia.org/wiki/Markov_chain
-[mb_poems]: /moby_dick_poems.html
+[mb_poems]: /moby-dick-poems.html
