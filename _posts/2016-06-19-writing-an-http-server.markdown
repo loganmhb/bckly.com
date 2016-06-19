@@ -1,5 +1,8 @@
 ---
 title: Writing a toy HTTP Server in Clojure
+layout: post
+category: code
+draft: true
 ---
 
 Though I use them all the time, I don't really understand how HTTP web servers work. That must mean, obviously, it's time to write one!
