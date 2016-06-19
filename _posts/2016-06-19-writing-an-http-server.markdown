@@ -5,6 +5,8 @@ category: code
 draft: true
 ---
 
+_The code for this post can be found [on Github][weasel]._
+
 Though I use them all the time, I don't really understand how HTTP web servers work. That must mean, obviously, it's time to write one!
 
 # Beginnings
@@ -300,3 +302,4 @@ There are still a few important things to do, of course. There's no provision fo
 
 [httpspec]: https://www.w3.org/Protocols/rfc2616/rfc2616.txt
 [insta]: https://github.com/Engelberg/instaparse
+[weasel]: https://github.com/loganmhb/weasel
