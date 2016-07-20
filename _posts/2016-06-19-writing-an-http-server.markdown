@@ -2,7 +2,6 @@
 title: Writing a toy HTTP Server in Clojure
 layout: post
 category: code
-draft: true
 ---
 
 _The code for this post can be found [on Github][weasel]._
@@ -296,10 +295,11 @@ That's all it takes! Time to write an HTTP handler. I want to be able to extend 
 
 It works!
 
-[hello world image]
+![hello world][hello]
 
-There are still a few important things to do, of course. There's no provision for handling bad requests, and if there's an error server side there's no provision for a 500 error. And of course it would be nice to serve more than just a hello world file at /.
+There are still a few important things to do, of course. There's no provision for handling bad requests, and if there's an error server side there's no provision for a 500 error. And of course it would be nice to serve more than just a hello world file at /. More, perhaps, in a second post.
 
+[hello]: /img/hello-world.png
 [httpspec]: https://www.w3.org/Protocols/rfc2616/rfc2616.txt
 [insta]: https://github.com/Engelberg/instaparse
 [weasel]: https://github.com/loganmhb/weasel
