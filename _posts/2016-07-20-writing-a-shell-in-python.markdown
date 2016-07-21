@@ -27,7 +27,7 @@ I thought even with Python I'd have to write a little code to do the splitting a
 
 # system calls
 
-Now comes the fun part. Once the shell has the name of the program it needs to invoke and the list of args (say, `['grep', '-r', 'cats', 'src/']` -- the name of the program is conventionally the first argument as well) it can use the `execve()` system call to start that program (or one of the other variants of exec*() -- there are more than I realized!). But there's a problem: `execve()` transforms the calling process (the shell) into the new process. I'd only ever be able to run one command in a session, because the shell would have to sacrifice itself in order to run the first command! Not a very useful shell.
+Now comes the fun part. Once the shell has the name of the program it needs to invoke and the list of args (say, `['grep', '-r', 'cats', 'src/']` -- the name of the program is conventionally the first argument as well) it can use the `execv()` system call to start that program (or one of the other variants of exec*() -- there are more than I realized!). But there's a problem: `execv()` transforms the calling process (the shell) into the new process. I'd only ever be able to run one command in a session, because the shell would have to sacrifice itself in order to run the first command! Not a very useful shell.
 
 To get around this, the shell can first use the `fork()` system call. `fork()` fascinates me -- it creates an _exact_ copy of the calling process, including memory layout and point of execution. The only difference between the parent process and the child process is that in the parent process, `fork()` returns the child's PID, while in the child process `fork()` returns 0. You can use this to take different actions in the parent and child like so:
 
@@ -70,9 +70,9 @@ else:
     print "Hi from the parent again! Created child %d which exited with code %d" % (pid, status)
 ```
 
-I found it surprising that `wait()` doesn't require the pid as an argument -- I'm curious how it works when there's more than one child process. But with this all the pieces are in place for a shell! We just have to wrap the whole thing in a loop and replace printing a greeting from the child process with `execve()`ing the program. You can see the resulting program [here][permaship]. It is extremely tiny! But it works surprisingly well.
+I found it surprising that `wait()` doesn't require the pid as an argument -- I'm curious how it works when there's more than one child process. But with this all the pieces are in place for a shell! We just have to wrap the whole thing in a loop and replace printing a greeting from the child process with `execv()`ing the program. You can see the resulting program [here][permaship]. It is extremely tiny! But it works surprisingly well.
 
-I ended up using Python's `os.spawnve()`, which basically wraps `fork()`, `execve()` and `wait()`. This also felt a little bit like cheating, but it's an educational exercise, after all. All of these Python standard lib calls are actually lower-level than Python wants you to be working -- there's a `subprocess` module which encapsulates these and more, including I/O and pipes -- but it felt more educational to figure out how this works at a low level.
+I ended up using Python's `os.spawnve()`, which basically wraps `fork()`, `execv()` and `wait()`. This also felt a little bit like cheating, but it's an educational exercise, after all. All of these Python standard lib calls are actually lower-level than Python wants you to be working -- there's a `subprocess` module which encapsulates these and more, including I/O and pipes -- but it felt more educational to figure out how this works at a low level.
 
 Next steps for this little shell are pipes, I/O redirection and globbing!
 
