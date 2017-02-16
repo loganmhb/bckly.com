@@ -9,7 +9,7 @@ This weekend I experimented with using Clojure to write poetry. It was a pretty 
 
 My goal was to produce some raw linguistic material programmatically that I could sift through and curate by hand in order to produce poems. I thought that the simplest way to produce interesting text was probably to use some source text (I chose Moby Dick) and [Markov chains][markov]. If you're not familiar, a Markov chain is a method for randomly generating streams of content (often text, but it can be used for any sequential kind of data). The method works by assembling a lookup table mapping values that occur in the sequence to the set of values that can follow them. You can implement this in a variety of ways, but I chose a fairly simple version. I split the text of Moby Dick into words, stripping out punctuation and capitalization, then mapped each pair of words to possible continuations. In Clojure data structures, a very small lookup table would look like this:
 
-```
+```clojure
 ;; Text: "It is not much but it is something."
 
 {
@@ -24,7 +24,7 @@ My goal was to produce some raw linguistic material programmatically that I coul
 
 Generating the Markov chain with Clojure turned out to be quite simple. It looks something like this:
 
-```
+```clojure
 (defn text->words
   "Split a file on whitespace or punctuation, remove things that
    don't look like words, and lowercase everything."
@@ -48,15 +48,22 @@ Generating the Markov chain with Clojure turned out to be quite simple. It looks
 
 The generated map is rather large (there are apparently 118098 distinct pairs of words appearing in Moby Dick). But for example, here is the list of words that appear following "moby dick":
 
-```
-("sideways" "seeks" "was" "seemed" "on" "two" "had" "cried" "bodily" "casts" "at" "and" "swam" "now" "with" "moved" "fired" "that" "and" "had" "i" "it's" "and" "doesn't" "as" "have" "himself" "in" "pooh" "was" "and" "not" "was" "and" "we" "rose" "but" "'moby" "to" "for" "for" "they" "for" "was" "though" "as" "and" "into" "had" "had" "which" "he" "had" "not" "was" "and" "the" "with" "those" "such" "yet" "it" "i" "to" "god" "god" "that" "that" "that" "but" "captain" "moby" "ye" "moby" "or")
+```clojure
+("sideways" "seeks" "was" "seemed" "on" "two" "had" "cried" "bodily"
+"casts" "at" "and" "swam" "now" "with" "moved" "fired" "that" "and"
+"had" "i" "it's" "and" "doesn't" "as" "have" "himself" "in" "pooh"
+"was" "and" "not" "was" "and" "we" "rose" "but" "'moby" "to" "for"
+"for" "they" "for" "was" "though" "as" "and" "into" "had" "had"
+"which" "he" "had" "not" "was" "and" "the" "with" "those" "such" "yet"
+"it" "i" "to" "god" "god" "that" "that" "that" "but" "captain" "moby"
+"ye" "moby" "or")
 ```
 
-Note there are some duplicates. My implementation is fairly naive and adds duplicates of a word if it appears more than once following a pair. This makes it easy to select more common words more often, but makes the lookup table larger than it strictly needs to be. I don't really care about that for this quantity of text, but if you were operating on a really large corput you'd want to change the implementation so that it tracks the set of following words and their associated frequencies in a nested map instead of just adding words every time. That makes the code more complicated, though, so I didn't do it yet. Some of the continuations also don't make much sense, such as "moby dick i". This is probably because of the punctuation I stripped out; if a sentence ends with "Moby Dick", pretty much any word can come after it. That's a downside to stripping out punctuation, but the upside is the lookup table doesn't have separate entries for "moby dick", "moby dick!" "moby dick?" and so on, which makes it more flexible. Either choice comes with tradeoffs.
+Note there are some duplicates. My implementation is fairly naive and adds duplicates of a word if it appears more than once following a pair. This makes it easy to select more common words more often, but makes the lookup table larger than it strictly needs to be. I don't really care about that for this quantity of text, but if you were operating on a really large corpus you'd want to change the implementation so that it tracks the set of following words and their associated frequencies in a nested map instead of just adding words every time. That makes the code more complicated, though, so I didn't do it yet. Some of the continuations also don't make much sense, such as "moby dick i". This is probably because of the punctuation I stripped out; if a sentence ends with "Moby Dick", pretty much any word can come after it. That's a downside to stripping out punctuation, but the upside is the lookup table doesn't have separate entries for "moby dick", "moby dick!" "moby dick?" and so on, which makes it more flexible. Either choice comes with tradeoffs.
 
 Now that we have the lookup table, we need a way to generate an actual chain of text.
 
-```
+```clojure
 (defn generate-text
   "Creates a lazy sequence of words based on the lookup-map."
   ([lookup-map]
@@ -72,7 +79,7 @@ This function can be called with a starting point in its 2-arity version, or can
 
 The results look like this:
 
-```
+```clojure
 (def lookup-table
   (create-lookup-table
     (text->words "resources/moby_dick.txt")))
