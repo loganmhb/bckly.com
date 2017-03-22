@@ -1,8 +1,7 @@
 # Site settings
 title: bckly
 email: logan.buckley@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  "If a thing is worth doing, it is worth doing badly."
+description: "Programs about writing, writing about programs."
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://bckly.com" # the base hostname & protocol for your site
 twitter_username: loganmhb
