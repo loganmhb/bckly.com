@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Logan Buckley is a programmer and sometime-writer living in Brooklyn.
+I'm Logan, a programmer and sometimes-writer living in Brooklyn.
