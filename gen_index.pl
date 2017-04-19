@@ -11,15 +11,18 @@ sub get_title {
     return undef;
 }
 
-print "<h1>Contents</h1>\n";
+print "<h1>Posts</h1>\n";
+
 my @pages = readdir($pages);
 for (reverse(sort(@pages))) {
     if ($_ =~ /[0-9-]+(.*)\.markdown/) {
         my $title = get_title("posts/$_");
         my ($date) = /^(\d{4}-\d{2}-\d{2})/;
         (my $href = "posts/$_") =~ s/markdown/html/;
-        print("<div><span class=\"date\">$date</span> <a href=\"/$href\"><h3>$title</h3></a></div>\n");
+        print("<div><span class=\"date\">$date</span> <a href=\"/$href\"><h3 class=\"post-listing\">$title</h3></a></div>\n");
     }
 }
+
+print("<footer><a href=\"about.html\">About</a></footer>");
 
 closedir($pages);

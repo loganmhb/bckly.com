@@ -9,7 +9,7 @@ PANDOC_FLAGS := --to html5 --smart --template template.html
 # - Generate an index page
 # - Generate RSS/atom feed
 
-site/index.html: $(POSTS_HTML) site/main.css $(PAGES)
+site/index.html: $(POSTS_HTML) site/main.css $(PAGES) gen_index.pl
 	echo $(PAGES)
 	echo $(PANDOC_FLAGS)
 	./gen_index.pl | pandoc $(PANDOC_FLAGS) -o $@
