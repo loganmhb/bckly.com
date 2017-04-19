@@ -7,7 +7,7 @@ layout: page
 
 These poems were created with the help of a simple program. The process is described in my blog post [here][algo_poems_post].
 
-# Poem 1
+## Poem 1
 
 and it has been hinted what at last rescued him
 
@@ -66,7 +66,7 @@ such unaccountable odds and ends
 against a blue-veined neck the pure element of air
 
 
-# Poem 2
+## Poem 2
 
 looking over the bulwarks the mariners
 

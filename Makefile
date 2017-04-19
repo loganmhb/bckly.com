@@ -1,15 +1,33 @@
-# FIXME: support nested directories?
-SOURCES := $(wildcard src/*.markdown)
-PAGES := $(SOURCES:src/%.markdown=site/%.html)
+POST_SOURCES := $(wildcard posts/*.markdown)
+PAGES := site/moby-dick-poems.html site/about.html site/asteroids/index.html
+POSTS_HTML := $(POST_SOURCES:posts/%.markdown=site/posts/%.html)
+PANDOC_FLAGS := --to html5 --smart --template template.html
 
-site/index.html: $(PAGES)
-	@echo $(SOURCES)
-	@echo $(PAGES)
-	@echo $(wildcard src/*.markdown)
-	@echo "Generating index.html"
+# TODO:
+# - Convert Jekyll templates to Pandoc
+# - Figure out what to do about non-post pages
+# - Generate an index page
+# - Generate RSS/atom feed
 
-site/%.html: src/%.markdown
-	pandoc --smart --standalone $< -o $@
+site/index.html: $(POSTS_HTML) site/main.css $(PAGES)
+	echo $(PAGES)
+	echo $(PANDOC_FLAGS)
+	./gen_index.pl | pandoc $(PANDOC_FLAGS) -o $@
+
+site/main.css: main.css
+	cp main.css site/
+
+site/%.html: pages/%.markdown
+	pandoc $(PANDOC_FLAGS) $< -o $@
+
+site/asteroids/index.html:
+	cp -r pages/asteroids site/asteroids
+
+site/posts/%.html: posts/%.markdown main.css
+	pandoc $(PANDOC_FLAGS) $< -o $@
 
 clean:
-	rm -rf site/*
+	rm -rf site/*.html
+
+serve: site/index.html
+	cd site/ && python -m http.server
