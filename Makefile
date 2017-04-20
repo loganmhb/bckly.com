@@ -10,8 +10,6 @@ PANDOC_FLAGS := --to html5 --smart --template template.html
 # - Generate RSS/atom feed
 
 site/index.html: $(POSTS_HTML) site/main.css $(PAGES) gen_index.pl
-	echo $(PAGES)
-	echo $(PANDOC_FLAGS)
 	./gen_index.pl | pandoc $(PANDOC_FLAGS) -o $@
 
 site/main.css: main.css
@@ -23,7 +21,7 @@ site/%.html: pages/%.markdown
 site/asteroids/index.html:
 	cp -r pages/asteroids site/asteroids
 
-site/posts/%.html: posts/%.markdown main.css
+site/posts/%.html: posts/%.markdown
 	pandoc $(PANDOC_FLAGS) $< -o $@
 
 clean:
