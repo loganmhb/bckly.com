@@ -1,7 +1,7 @@
-/code/a-memory-allocator.html -> /posts/a-memory-allocator.html
-/reasons-for-writing.html -> /posts/reasons-for-writing.html
-/progamming-in-chromeos.html -> /posts/programming-in-chromeos.html
-/code/writing-a-shell-in-python.html -> /posts/writing-a-shell-in-python.html
-/code/writing-an-http-server.html -> /posts/writing-an-http-server.html
-/code/algorithmic-poems.html -> /posts/algorithmic-poems.html
-/code/hello-elm.html -> /posts/hello-elm.html
+/code/a-memory-allocator.html -> /posts/2017-02-11-a-memory-allocator.html
+/reasons-for-writing.html -> /posts/2016-12-16-reasons-for-writing.html
+/progamming-in-chromeos.html -> /posts/2016-09-18-programming-in-chromeos.html
+/code/writing-a-shell-in-python.html -> /posts/2016-07-20-writing-a-shell-in-python.html
+/code/writing-an-http-server.html -> /posts/2016-06-19-writing-an-http-server.html
+/code/algorithmic-poems.html -> /posts/2016-04-10-algorithmic-poems.html
+/code/hello-elm.html -> /posts/2016-03-19-hello-elm.html

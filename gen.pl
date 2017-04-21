@@ -35,7 +35,7 @@ my $item_template = '
         <guid isPermaLink="true">LINK</guid>
       </item>';
 
-my $index = "<h1>Posts</h1\n";
+my $index = "<h1>posts</h1\n";
 my $feed = $feed_template;
 my $feed_posts = "";
 my $baseurl = "https://bckly.com";
