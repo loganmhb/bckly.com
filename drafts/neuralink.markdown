@@ -14,6 +14,16 @@ Speaking purely from a subjective, experiential point of view, thoughts are not 
 
 [What is the role of language in thought?]
 
+Then there is the question of art. Urban wonders whether the radical new communicative capabilities of a brain-machine interface might allow more artists to fulfill their potential:
+
+> How many symphonies could Mozart have written if he had been able to
+> think the music in his head onto the page? How many Mozarts are out
+> there right now who never learned how to play instruments well
+> enough to get their talent out?
+
+The possibilities are certainly interesting, but this line of reasoning makes a qualitative error about how art works, I think. Artistic mediums are more than obstacles to producing art. In fact their role as obstacle is crucial to their purpose. Art arises from a medium resisting a message, and a work of art is the record of an artist's struggle with that resistance. The resistance doesn't merely modulate the artistic expression -- it _creates_ the artistic expression. Mozart didn't have some sort of pristine musical ideas that fell through instruments and sheet music into their earthly, fallen form. Without the instruments and the sheet music there would be no Mozart. Instead there would be other forms, defined by other constraints.
+
+
 I think this passage on the dangers of brain-machine interfaces is telling:
 
 > In the last item I was thinking about bad guys using hacking to
