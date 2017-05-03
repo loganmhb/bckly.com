@@ -18,8 +18,8 @@ $feed_template = <<EOF
     <description>the blog of logan buckley</description>
     <link>https://bckly.com/</link>
     <atom:link href="https://bckly.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate><%= Time.now.strftime("%a, %d %b %Y %H:%M:%S %z") %></pubDate>
-    <lastBuildDate><%= Time.now.strftime("%a, %d %b %Y %H:%M:%S %z") %></lastBuildDate>
+    <pubDate><%= Time.now.rfc2822 %></pubDate>
+    <lastBuildDate><%= Time.now.rfc2822 %></lastBuildDate>
     <% for @item in @items %>
     <item>
         <title><%= @item.title %></title>
