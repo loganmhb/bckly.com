@@ -87,7 +87,6 @@ for (reverse(sort(@pages))) {
 }
 
 $feed =~ s/POSTS/$feed_posts/;
-$index .= "<footer><a href=\"about.html\">About</a> | <a href=\"/feed.xml\">Subscribe via RSS</a></footer>";
 
 closedir($pages);
 
