@@ -38,7 +38,7 @@ my $item_template = '
 my $index = "<h1>posts</h1\n";
 my $feed = $feed_template;
 my $feed_posts = "";
-my $baseurl = "https://bckly.com";
+my $baseurl = "https://bckly.com/";
 
 # Interpolate the current date for the feed.
 my $now = strftime("%a, %d %b %Y %H:%M:%S %z", localtime(time()));
