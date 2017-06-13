@@ -55,7 +55,7 @@ sub get_title {
 
 sub xml_for_item {
     my ($title, $date, $href, $description) = @_;
-    
+
     # XML-escape the description
     $description =~ s/&/&amp;/g;
     $description =~ s/</&lt;/g;
@@ -63,7 +63,7 @@ sub xml_for_item {
 
     my @lt = localtime(Time::Piece->strptime($date, "%Y-%M-%d"));
     $date = strftime("%a, %d %b %Y %H:%M:%S %z", @lt[0..8]); # chokes on the last list elem for some reason
-    
+
     $_ = $item_template;
     s/TITLE/$title/g;
     s/DATE/$date/g;

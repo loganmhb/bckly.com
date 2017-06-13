@@ -5,3 +5,4 @@ h1,h2,h3{line-height:1.2}
 h3.post-listing{display:inherit;margin: 10px}
 code{font-size: 14px;line-height: 1.2}
 footer{margin-top:20px}
+blockquote{border-left:1px #444 solid;color:#444;padding-left:10px}
