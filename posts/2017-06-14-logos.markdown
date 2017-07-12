@@ -1,6 +1,6 @@
 ---
 title: Logos
-date: 2017-06-13
+date: 2017-06-14
 ---
 
 For the past few weeks, I've been at the Recurse Center working on
@@ -146,10 +146,15 @@ I'll be able to implement the separate transactor component and client
 library while I'm here at RC, and perhaps complete some other smaller
 features as well, though I will certainly not achieve anything like
 the performance, high-availability guarantees, or transactional
-capabilities of Datomic in that short time. My stretch goal for the
-end of the batch is to implement enough features that I can write a
-small Twitter-style webapp in Python that uses the database libary via
-an FFI; we'll see if I can actually get that far.
+capabilities of Datomic in that short time. My primary goal is to get
+the basic architecture (client, transactor, backing store) working
+without worrying too much about performance or space efficiency; if I
+can implement supplementary in-memory indexes and batched index
+updates I'll be thrilled, but I think that's a substantial amount of
+complexity. My stretch goal for the end of the batch is to implement
+enough features that I can write a small Twitter-style webapp in
+Python that uses the database libary via an FFI; we'll see if I can
+actually get that far.
 
 [logos-git]: https://github.com/loganmhb/logos
 

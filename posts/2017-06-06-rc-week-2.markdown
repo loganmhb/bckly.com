@@ -7,29 +7,92 @@ Another week, another update.
 
 ## This week
 
-I surprised myself by only working on the [database project](https://github.com/loganmhb/logos).[^db] I'm not sure I've ever spent so much concentrated time focused on a single project of my own like this -- even in college I always had a couple of different things I had to be working on. It's kind of addictive, but I also worry that it will quickly become exhausting.
+I surprised myself by only working on the [database
+project](https://github.com/loganmhb/logos).[^db] I'm not sure I've
+ever spent so much concentrated time focused on a single project of my
+own like this -- even in college I always had a couple of different
+things I had to be working on. It's kind of addictive, but I also
+worry that it will quickly become exhausting.
 
-I focused this week on implementing better data structures for the database index. I spent about a day working on understanding how B-trees work, with some help from Knuth's volume 3, _Sorting and Searching_.[^knuth] Based on that I was able to implement an immutable B-tree in Rust where inserting an element returns a reference to a new tree that shares structure with the old one. The next day Josh helped me find a bunch of bugs in my implementation (only off-by-one errors of various sorts, thanks to Rust's type system), and we were able to swap out the standard library's B-tree set for the custom implementation without breaking the query engine. We also made some ergonomic improvements to the CLI, so it's now sort of usable!
+I focused this week on implementing better data structures for the
+database index. I spent about a day working on understanding how
+B-trees work, with some help from Knuth's volume 3, _Sorting and
+Searching_.[^knuth] Based on that I was able to implement an immutable
+B-tree in Rust where inserting an element returns a reference to a new
+tree that shares structure with the old one. The next day Josh helped
+me find a bunch of bugs in my implementation (only off-by-one errors
+of various sorts, thanks to Rust's type system), and we were able to
+swap out the standard library's B-tree set for the custom
+implementation without breaking the query engine. We also made some
+ergonomic improvements to the CLI, so it's now sort of usable!
 
-On Friday I started looking at how to persist the nodes of the B-tree to disk, which is the hard part. Datomic, which I'm basing my design on, outsources that work to other databases, using something like Postgresql, DynamoDB or Cassandra as a key-value store for blobs of binary data. For now at least I'm planning to do the same, so the main things I have to deal with are serializing the tree and adapting the B-tree insert and search algorithms to work when each node must be fetched from disk. (For performance the nodes can be cached since they're immutable, but the worst-case is always a disk fetch.)
+On Friday I started looking at how to persist the nodes of the B-tree
+to disk, which is the hard part. Datomic, which I'm basing my design
+on, outsources that work to other databases, using something like
+Postgresql, DynamoDB or Cassandra as a key-value store for blobs of
+binary data. For now at least I'm planning to do the same, so the main
+things I have to deal with are serializing the tree and adapting the
+B-tree insert and search algorithms to work when each node must be
+fetched from disk. (For performance the nodes can be cached since
+they're immutable, but the worst-case is always a disk fetch.)
 
 ## Goals
 
-Last week I promised myself a post about my Recurse Center goals. A lot of them are things I want to try to do while I'm here, but others are warnings to myself of things to watch out for:
+Last week I promised myself a post about my Recurse Center goals. A
+lot of them are things I want to try to do while I'm here, but others
+are warnings to myself of things to watch out for:
 
-*Come away with a basic, working implementation of my database*. A good barometer here might be, can you implement a toy Twitter with it? I have a bunch of sub-goals for the database that I'll cover in a different post, but they mostly boil down to features of Datomic I want to implement.
+*Come away with a basic, working implementation of my database*. A
+good barometer here might be, can you implement a toy Twitter with it?
+I have a bunch of sub-goals for the database that I'll cover in a
+different post, but they mostly boil down to features of Datomic I
+want to implement.
 
-*Pair on someone else's substantial project*. So far I've been working almost entirely on my own thing, and while I've done some pairing on it I still feel like I'd learn more by sometimes working with someone else on something they want to do.
+*Pair on someone else's substantial project*. So far I've been working
+almost entirely on my own thing, and while I've done some pairing on
+it I still feel like I'd learn more by sometimes working with someone
+else on something they want to do.
 
-*Take advantage of being in the RC community*. It's an incredibly rich opportunity to meet people and learn things I didn't know I didn't know, so I want to keep my eyes open for opportunities to do that and say yes to them. The capture the flag challenge in week 1 was a good example of this.
+*Take advantage of being in the RC community*. It's an incredibly rich
+opportunity to meet people and learn things I didn't know I didn't
+know, so I want to keep my eyes open for opportunities to do that and
+say yes to them. The capture the flag challenge in week 1 was a good
+example of this.
 
-*Learn more about networking*. I think this is one of the areas where my programming knowledge is most shallow, and I'd like to work on something that involves some low-level networking -- maybe a peer-to-peer or UDP-based project. The database will involve a little bit of this but not a ton, I think, so another small project or two would be nice.
+*Learn more about networking*. I think this is one of the areas where
+my programming knowledge is most shallow, and I'd like to work on
+something that involves some low-level networking -- maybe a
+peer-to-peer or UDP-based project. The database will involve a little
+bit of this but not a ton, I think, so another small project or two
+would be nice.
 
-*Write blog posts about interesting things I learn*. These weekly updates are good, but I'd also like to do more in-depth and one-off posts about things I'm learning or working on. One I might do soon is on implementing an iterator in Rust using an algorithm that would normally be recursive, which was straightforward for me.
+*Write blog posts about interesting things I learn*. These weekly
+updates are good, but I'd also like to do more in-depth and one-off
+posts about things I'm learning or working on. One I might do soon is
+on implementing an iterator in Rust using an algorithm that would
+normally be recursive, which was not straightforward for me.
 
-*Stay excited about programming*. Often my enthusiasm for programming runs in cycles. I'll get obsessed with a project or an idea, work on it with most of my free time for a week or two, and then burn out and not do anything for a while. I'd like to practice sustaining that kind of excitement over a longer period while still carving out time for socializing, taking care of myself, and pursuing other interests like writing.
+*Stay excited about programming*. Often my enthusiasm for programming
+runs in cycles. I'll get obsessed with a project or an idea, work on
+it with most of my free time for a week or two, and then burn out and
+not do anything for a while. I'd like to practice sustaining that kind
+of excitement over a longer period while still carving out time for
+socializing, taking care of myself, and pursuing other interests like
+writing.
 
-Speaking of which, *take care of myself*. Eat well and exercise. I'm used to working remotely, where it's a little easier to do these things, not to mention the difference between checking out of work at the end of the day and putting my personal project down just for a little while. But this is really important -- I'll be much happier, more fulfilled and more productive if I carve out time to cook myself dinner and go for a run now and then. This is something I haven't been doing well the last two weeks, which is not the end of the world but is something to watch out for.
+Speaking of which, *take care of myself*. Eat well and exercise. I'm
+used to working remotely, where it's a little easier to do these
+things, not to mention the difference between checking out of work at
+the end of the day and putting my personal project down just for a
+little while. But this is really important -- I'll be much happier,
+more fulfilled and more productive if I carve out time to cook myself
+dinner and go for a run now and then. This is something I haven't been
+doing well the last two weeks, which is not the end of the world but
+is something to watch out for.
 
-[^db]: I'll write a post about what this is exactly and why I think it's interesting soon, I think.
-[^knuth]: The book turned out to be both approachable and a great conversation-starter -- people kept asking me what I was working on that required me to read that. If you want to make friends with Recursers, apparently carrying around a copy of Knuth is the way to go.
+[^db]: I'll write a post about what this is exactly and why I think
+it's interesting soon, I think.  [^knuth]: The book turned out to be
+both approachable and a great conversation-starter -- people kept
+asking me what I was working on that required me to read that. If you
+want to make friends with Recursers, apparently carrying around a copy
+of Knuth is the way to go.
