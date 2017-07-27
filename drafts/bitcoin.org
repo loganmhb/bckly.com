@@ -1,0 +1,142 @@
+#+title: Bitcoin foundations
+
+I was listening to an episode of Radiolab about cryptocurrencies the
+other day, and I realized that while I had a general understanding of
+how Bitcoin and other cryptocoins work I couldn't explain the specific
+algorithms involved. This is exactly the sort of thing RC is great for
+learning, so I decided to spend a couple days reading up on Bitcoin
+and trying to implement a simple cryptocurrency of my own.
+
+My first stop was the [[https://bitcoin.org/bitcoin.pdf][Bitcoin whitepaper]], the original research paper
+that introduced the idea for Bitcoin, published by the figure known as
+Satoshi Nakamoto on a cryptography mailing list in October
+of 2008. Despite my having only a casual knowledge of cryptography, I
+found the paper to be clear and elegant. Of course, I as soon as I sat
+down to implement some of the most important ideas from the paper I
+realized that I hadn't understood it as well as I thought, but by
+going back and forth between the code and the paper and discussing it
+with fellow Recursers I think I understand the basics well enough to
+try to explain them in a blog post.
+
+There's an obvious problem with a purely digital currency: what
+prevents you from making copies of it? There are fields of software
+dedicated to preventing copying (DRM on movies and music being the one
+most people have encountered) but they are far from perfect in
+practice and wouldn't be good enough for a virtual currency. They also
+rely on /someone/ (the owner) being able to copy the files in question
+(otherwise no one could ever access them) which is something Bitcoin
+is designed to avoid.
+
+A Bitcoin is not a file you can pass around or make copies of. It's
+not like cash, in other words. It's more like paying by check, with
+the role of the bank being replaced by a public ledger of all
+transactions that anyone can inspect. If you "own" a Bitcoin, it means
+that the ledger has recorded that you have the right to spend that
+Bitcoin. You "give" someone a Bitcoin by transfering that right to
+spend. Bitcoins have no existence outside of this public ledger.
+
+This raises a few questions. First, how do you actually transfer a
+coin? Second, who keeps the ledger? That second question gets to the
+heart of how Bitcoin works, but it will be easier to explain if we
+first assume there is a public ledger and describe how Bitcoin
+transactions would work, given that assumption.
+
+Bitcoin transactions rely on digital signatures, which can be
+implemented using public-key cryptography. You must have the private
+key from a keypair in order to "sign" (encrypt) a piece of data, but
+anyone who has only the public key can verify (decrypt) it. The
+Bitcoin ledger keeps track of which keys are allowed to spend
+(i.e. sign over to another key) which Bitcoins. You transfer a Bitcoin
+to someone else by signing their /public/ key with your /private/ key,
+and then adding that to the public ledger (more on how the ledger
+works shortly). Anyone looking at the ledger can see whether you are
+still entitled to make that transaction, or whether you've already
+spent the coin and the transaction should be considered invalid.
+
+Minor extensions to this basic model, namely allowing transactions to
+have multiple inputs and outputs, enable transactions to send multiple
+coins or fractions of a coin in addition to exactly one coin -- for
+example, if you have received 15 coins in one transaction and 20 in
+another and you want to pay someone 21 bitcoins, you can create a
+transaction that has both of those transactions as inputs and outputs
+21 coins to your recipient's public key and 14 (the change) back to
+/your/ key.
+
+In order to support this transaction system, there are two important
+requirements the ledger must satisfy. It should be possible to tell
+whether one transaction preceeded another. That way, you can figure
+out, if someone tries to spend a coin twice, which one should be
+considered legitimate. It should also be as difficult as possible to
+fake the time of a transaction, to prevent fraud. If we allowed
+ourselves to rely on a trusted third party, this would be as easy as
+posting all transactions to some trustworthy public site -- Facebook,
+say -- where anyone could verify whether a transaction is valid or
+whether that particular coin has already been spent in a different
+transaction. You couldn't fake the time of a post unless you had
+inside access to Facebook (this is where the "trust" part comes in).
+
+Without the trusted third party, things become difficult. I could, for
+example, post all transactions I personally make on my blog, but I
+could go back at any time to reorder, forge, or delete transactions,
+so no one else could rely on that record witout trusting me. But if
+I'm not willing to trust someone else, I won't be willing to rely on
+their site either.
+
+Bitcoin solves this problem without relying on any trusted party using
+a concept called "proof-of-work" and a structure known as the
+blockchain. It works like this: anyone can run a node in the Bitcoin
+network. In order to initiate a transaction, you send it to a node,
+and that node will rebroadcast it to other nodes in the
+network. Meanwhile, all nodes are working independently to create a
+"block" in the chain -- a group of valid transactions to be added to
+the ledger. The block consists of three important components: 
+
+1. A set of transactions to be added to the ledger.
+2. A nonce value -- a number which can be incremented until the hash
+   of the block begins with a certain number of zeroes. The difficulty
+   of finding this nonce rises exponentially proportional to the
+   number of zero bits required.[fn:change] This is the "proof-of-work" --
+   there's no way to create a block without doing the computation
+   necessary to find this nonce value. 
+3. The hash value of the previous block in the chain, which guarantees
+   that the block was created /after/ the previous block, which gives
+   the block chain the important ordering property I mentioned
+   earlier.
+
+The second and third items together make it exceedingly difficult to
+forge a copy of the blockchain. Since each block references a previous
+block, in order to forge a copy of the blockchain that altered a past
+transaction you'd have to recreate the blockchain all the way back to
+that transaction -- but there's no way to recreate the chain without
+putting in enough work to find the blocks, and meanwhile, the real
+blockchain will continue to grow. That means, as long as no one person
+controls more than half of the computers in the network,[fn:half] the longest
+blockchain will be the valid one, and forgeries of past blocks won't
+be practical. All an individual node has to do in order to support the
+"real" blockchain is to work on the search for the next block for that
+chain -- there's no voting or explicit consensus mechanism needed.
+
+That's it! There's more to Bitcoin's actual implementation than this
+simple model of transactions and a blockchain, but that was the
+crucial innovation that enabled Bitcoin to happen and remains the
+foundation of its design.
+
+[fn:half]
+You might be thinking: how can we count on more than half of
+computers in the network to be honest? What incentive do people have
+to run a network node? Bitcoin incentivizes nodes to search for the
+next block ("mine" a block, in cryptocurrency jargon) by allowing the
+node that finds a block to create a certain number of new
+Bitcoins. All Bitcoins in existence were created this way. It's also
+possible to introduce transaction fees, so that whoever mines a block
+gets paid the fees for all the transactions in that block, which
+Bitcoin did a few years into its existence.
+
+[fn:change]
+The difficulty of mining a new block (i.e. the number of zero
+bits the block's hash must begin with) can be adjusted over time so
+that as the network grows, the time it takes for some node to find the
+next block remains approximately constant. (For Bitcoin, it takes
+around 10 minutes of work by *all* the computers in the world mining
+Bitcoins for one of them to find a nonce that satisfies the
+proof-of-work.)

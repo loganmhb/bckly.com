@@ -30,7 +30,7 @@ site/posts/%.html: posts/%.markdown template.html
 	@mkdir -p site/posts
 	pandoc $(PANDOC_FLAGS) $< -o $@
 
-site/drafts/%.html: drafts/%.markdown template.html
+site/drafts/%.html: drafts/%.* template.html
 	@mkdir -p site/drafts
 	pandoc $(PANDOC_FLAGS) $< -o $@
 
