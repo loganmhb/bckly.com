@@ -1,22 +1,74 @@
 #+title: Bitcoin foundations
 
-I was listening to an episode of Radiolab about cryptocurrencies the
-other day, and I realized that while I had a general understanding of
-how Bitcoin and other cryptocoins work I couldn't explain the specific
-algorithms involved. This is exactly the sort of thing RC is great for
-learning, so I decided to spend a couple days reading up on Bitcoin
-and trying to implement a simple cryptocurrency of my own.
+While listening to an episode of Radiolab about cryptocurrencies the
+other day, I realized that despite having a general understanding of
+how Bitcoin and other cryptocoins work, I couldn't explain any details
+of the algorithms involved. That seemed like exactly the sort of thing
+[[http://recurse.com/][the Recurse Center]] is great for learning, so I decided to spend a
+couple days reading up on Bitcoin and trying to implement a simple
+cryptocurrency of my own.
 
 My first stop was the [[https://bitcoin.org/bitcoin.pdf][Bitcoin whitepaper]], the original research paper
-that introduced the idea for Bitcoin, published by the figure known as
-Satoshi Nakamoto on a cryptography mailing list in October
-of 2008. Despite my having only a casual knowledge of cryptography, I
-found the paper to be clear and elegant. Of course, I as soon as I sat
-down to implement some of the most important ideas from the paper I
-realized that I hadn't understood it as well as I thought, but by
-going back and forth between the code and the paper and discussing it
-with fellow Recursers I think I understand the basics well enough to
-try to explain them in a blog post.
+that introduced the idea for Bitcoin. It was published by a figure
+known as Satoshi Nakamoto (real identity or identities unknown) on a
+cryptography mailing list in October of 2008, a few months before
+Bitcoin was actually released. Despite my having only a casual
+knowledge of cryptography, I found the paper to be clear and
+elegant. Of course, I as soon as I sat down to implement some of the
+most important ideas from the paper I realized that I hadn't
+understood it as well as I thought, but by going back and forth
+between the code and the paper and discussing it with fellow Recursers
+I think I understand the basics well enough to try to explain them in
+a blog post.
+
+** Aside: hashes and public key cryptography
+
+Before we begin, there are a couple of cryptographic concepts that are
+important background for understanding how Bitcoin works:
+cryptographic hash functions and public key cryptography.
+
+A cryptographic hash function is one of a family of functions that
+satisfies a particular set of useful properties. The function must
+take an arbitrary amount of data and produce an output of a fixed size
+-- the SHA256 function, for example, produces 32 bytes of output. The
+function must always produce the same output for a given input, and a
+"hash collision" -- when two different pieces of data produce the same
+hash -- must be exceedingly unlikely. Moreover, any small change in
+the input must produce a completely different ouput, so that there is
+no efficient way to discover the input given only the output. These
+functions can be used in various ways to confirm the identity of a
+piece of data. For example, if you have a downloaded file and know
+what the hash of the file should be, you can run the file through the
+hash function to verify that it hasn't been tampered with. Changing
+even one bit of the file would result in a totally different hash
+value.
+
+Public-key cryptography refers to a set of encryption methods that do
+not require the parties involved to securely share a key. Unlike
+traditional encryption methods in which the same key is used to
+encrypt and decrypt the data, in public-key encryption you need one
+key to encrypt a message and a different one to decrypt it. That means
+you can share one key (the public one) but not the other (the private
+one). These ciphers are a crucial foundation of the internet. Without
+them, you wouldn't be able to communicate securely without setting up
+a secure channel ahead of time by agreeing on a secret key -- and if
+you have a channel available to agree on a key, why not just
+communicate using that? With public-key cryptography, however, it's
+possible to send someone a message securely knowing only their public
+key -- no secret channel needed.
+
+Normally you would generate a keypair and then share your encryption
+key, allowing anyone to encrypt a message for you, while keeping your
+decryption key private so that only you can read a message. But it's
+also possible to reverse this: you can share the decryption key,
+meaning anyone can read the message, but keep the encryption key
+secret, so that only you can /write/ it. This is known as a
+"signature," and can be used to prove authorship of a document rather
+than keep the contents of the document secret. Bitcoin relies on the
+signature variant to ensure that only one person can "spend" (sign) a
+coin at a time.
+
+** A virtual currency
 
 There's an obvious problem with a purely digital currency: what
 prevents you from making copies of it? There are fields of software
@@ -62,6 +114,8 @@ transaction that has both of those transactions as inputs and outputs
 21 coins to your recipient's public key and 14 (the change) back to
 /your/ key.
 
+** Proof of work
+
 In order to support this transaction system, there are two important
 requirements the ledger must satisfy. It should be possible to tell
 whether one transaction preceeded another. That way, you can figure
@@ -88,8 +142,8 @@ blockchain. It works like this: anyone can run a node in the Bitcoin
 network. In order to initiate a transaction, you send it to a node,
 and that node will rebroadcast it to other nodes in the
 network. Meanwhile, all nodes are working independently to create a
-"block" in the chain -- a group of valid transactions to be added to
-the ledger. The block consists of three important components: 
+"block" in the chain -- a group of valid transactions[fn:whichtransactions] to be added to
+the ledger. The block consists of three important components:
 
 1. A set of transactions to be added to the ledger.
 2. A nonce value -- a number which can be incremented until the hash
@@ -97,7 +151,7 @@ the ledger. The block consists of three important components:
    of finding this nonce rises exponentially proportional to the
    number of zero bits required.[fn:change] This is the "proof-of-work" --
    there's no way to create a block without doing the computation
-   necessary to find this nonce value. 
+   necessary to find this nonce value.
 3. The hash value of the previous block in the chain, which guarantees
    that the block was created /after/ the previous block, which gives
    the block chain the important ordering property I mentioned
@@ -108,18 +162,21 @@ forge a copy of the blockchain. Since each block references a previous
 block, in order to forge a copy of the blockchain that altered a past
 transaction you'd have to recreate the blockchain all the way back to
 that transaction -- but there's no way to recreate the chain without
-putting in enough work to find the blocks, and meanwhile, the real
-blockchain will continue to grow. That means, as long as no one person
-controls more than half of the computers in the network,[fn:half] the longest
-blockchain will be the valid one, and forgeries of past blocks won't
-be practical. All an individual node has to do in order to support the
-"real" blockchain is to work on the search for the next block for that
-chain -- there's no voting or explicit consensus mechanism needed.
+calculating a new nonce for each block, which is very
+time-consuming. Meanwhile, the real blockchain will continue to
+grow. That means, as long as no one person controls more than half of
+the computers in the network,[fn:half] it's very unlikely that the
+forged blockchain would be able to catch up. Therefore the longest
+blockchain will be the real one. All an individual node has to do in
+order to support the original blockchain is to work on the search for
+the next block for that chain -- there's no voting or other explicit
+consensus mechanism needed.
 
 That's it! There's more to Bitcoin's actual implementation than this
 simple model of transactions and a blockchain, but that was the
 crucial innovation that enabled Bitcoin to happen and remains the
 foundation of its design.
+
 
 [fn:half]
 You might be thinking: how can we count on more than half of
@@ -140,3 +197,13 @@ next block remains approximately constant. (For Bitcoin, it takes
 around 10 minutes of work by *all* the computers in the world mining
 Bitcoins for one of them to find a nonce that satisfies the
 proof-of-work.)
+
+[fn:whichtransactions]
+Precisely which transactions get included in a block is a more
+involved question, and Bitcoin has some additional features to
+encourage nodes to include transactions in their blocks
+(e.g. transaction fees). The main restriction is that all the
+transactions must be valid, because otherwise other nodes won't accept
+the block and it won't become part of the blockchain, but it is
+possible for a node to mine an empty block of transactions and this
+occasionally happens.
