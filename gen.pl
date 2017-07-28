@@ -35,7 +35,7 @@ my $item_template = '
         <guid isPermaLink="true">LINK</guid>
       </item>';
 
-my $index = "<h1>posts</h1\n";
+my $index = "<h1>posts</h1>\n<table>\n";
 my $feed = $feed_template;
 my $feed_posts = "";
 my $baseurl = "https://bckly.com/";
@@ -81,11 +81,12 @@ for (reverse(sort(@pages))) {
         my ($date) = /^(\d{4}-\d{2}-\d{2})/;
         (my $href = "posts/$_") =~ s/markdown/html/;
         my $description = `pandoc --to html5 posts/$_`;
-        $index .= "<div><span class=\"date\">$date</span> <a href=\"/$href\"><h3 class=\"post-listing\">$title</h3></a></div>\n";
+        $index .= "<tr><td class=\"date\">$date</td><td><a href=\"/$href\"><h3 class=\"post-listing\">$title</h3></a></td></tr>\n";
         $feed_posts .= xml_for_item($title, $date, $href, $description)
     }
 }
 
+$index .= "</table>";
 $feed =~ s/POSTS/$feed_posts/;
 
 closedir($pages);
