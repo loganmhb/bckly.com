@@ -1,6 +1,6 @@
 ---
 title: Logos
-date: 2017-06-14
+date: June 14, 2017
 ---
 
 For the past few weeks, I've been at the Recurse Center working on

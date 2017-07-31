@@ -1,5 +1,6 @@
 ---
 title: Writing a toy HTTP Server in Clojure
+date: June 19, 2016
 layout: post
 category: code
 ---

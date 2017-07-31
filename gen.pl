@@ -48,7 +48,7 @@ sub get_title {
     my ($page) = @_;
     open(my $contents, $page) or die "$page: $!";
     foreach(<$contents>) {
-        /^title: (.*)$/ && return $1;
+        /^(\#\+)?title: (.*)$/ && return $2;
     }
     return undef;
 }
@@ -76,10 +76,10 @@ opendir(my $pages, "posts") or die "Couldn't open dir";
 my @pages = readdir($pages);
 
 for (reverse(sort(@pages))) {
-    if ($_ =~ /[0-9-]+(.*)\.markdown/) {
+    if ($_ =~ /[0-9-]+(.*)\..*/) {
         my $title = get_title("posts/$_");
         my ($date) = /^(\d{4}-\d{2}-\d{2})/;
-        (my $href = "posts/$_") =~ s/markdown/html/;
+        (my $href = "posts/$_") =~ s/(markdown|org)/html/;
         my $description = `pandoc --to html5 posts/$_`;
         $index .= "<tr><td class=\"date\">$date</td><td><a href=\"/$href\"><h3 class=\"post-listing\">$title</h3></a></td></tr>\n";
         $feed_posts .= xml_for_item($title, $date, $href, $description)

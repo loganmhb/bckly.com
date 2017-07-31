@@ -1,6 +1,6 @@
 ---
 title: Some updates on Logos
-date: 2017-07-13
+date: July 13, 2017
 ---
 
 It's been almost a month since I first [posted][original] about

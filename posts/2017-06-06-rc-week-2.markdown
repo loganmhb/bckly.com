@@ -1,6 +1,6 @@
 ---
 title: Week 2 at the Recurse Center
-date: 2017-06-06
+date: June 6, 2017
 ---
 
 Another week, another update.

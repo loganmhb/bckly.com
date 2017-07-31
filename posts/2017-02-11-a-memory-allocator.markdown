@@ -2,7 +2,7 @@
 title: A Memory Allocator
 layout: post
 category: code
-date: 2017-02-11
+date: February 11, 2017
 ---
 
 Though I work primarily as a web developer, I've been drawn to programming in C for years. I guess it's the antihero of programming languages: it's dangerous, yes, but it's exciting, and it's at the center of everything. I'm thankful I don't have to write C for work, but there's a mystique to it that's appealing for hacking around in your spare time. You're close to the machine, the veil is pulled back, and there are no guard rails. You hear people talk about C in terms that range from political to quasi-religious: C is freedom. C is power. The most important project of the early Free Software Foundation was `gcc`, the GNU C compiler, because if you can compile C you can do whatever you need to do.

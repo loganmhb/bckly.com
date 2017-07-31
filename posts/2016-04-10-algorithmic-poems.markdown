@@ -1,5 +1,6 @@
 ---
 title: Algorithmic Poetry
+date: April 10, 2014
 layout: post
 category: code
 tags: art, clojure

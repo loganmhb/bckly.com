@@ -1,6 +1,6 @@
 ---
 title: Week 1 at the Recurse Center
-date: 2017-05-28
+date: May 28, 2017
 ---
 
 Last Monday was my first day at the [Recurse Center][rc], a programming retreat in New York City where I'll be spending the next three months. It's been an exciting week, and this seems like a good time to jot down some thoughts about how things have gone so far. In a follow-up post I'll talk about what my goals are for my time here.

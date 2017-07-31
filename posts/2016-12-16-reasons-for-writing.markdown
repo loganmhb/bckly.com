@@ -1,6 +1,7 @@
 ---
 title: Reasons for Writing
 layout: post
+date: December 16, 2016
 ---
 
 It's been a few months now since I started this blog and so far all of the posts have been pretty shallow and technical in nature. There's nothing wrong with writing like that some of the time, but that kind of writing was not what interested me in blogging in the first place and I plan to make a conscious effort to branch out.

@@ -1,6 +1,7 @@
-POST_SOURCES := $(wildcard posts/*.markdown)
+POST_SOURCES := $(wildcard posts/*)
 PAGES := site/moby-dick-poems.html site/about.html site/asteroids/index.html
 POSTS_HTML := $(POST_SOURCES:posts/%.markdown=site/posts/%.html)
+POSTS_HTML += $(POST_SOURCES:posts/%.org=site/posts/%.html)
 PANDOC_FLAGS := --to html5 --smart --template template.html
 
 site/index.html: $(POSTS_HTML) site/feed.xml site/main.css $(PAGES) gen.pl site/img template.html site/cv.pdf
@@ -26,7 +27,7 @@ site/asteroids/index.html:
 site/img:
 	cp -r img site/img
 
-site/posts/%.html: posts/%.markdown template.html
+site/posts/%.html: posts/%.* template.html
 	@mkdir -p site/posts
 	pandoc $(PANDOC_FLAGS) $< -o $@
 
