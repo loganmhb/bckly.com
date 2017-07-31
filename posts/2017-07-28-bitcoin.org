@@ -94,13 +94,13 @@ heart of how Bitcoin works, but it will be easier to explain if we
 first assume there is a public ledger and describe how Bitcoin
 transactions would work, given that assumption.
 
-Bitcoin transactions rely on digital signatures, which can be
+Bitcoin transactions rely, as I mentioned, on digital signatures
 implemented using public-key cryptography. You must have the private
-key from a keypair in order to "sign" (encrypt) a piece of data, but
+key from a keypair in order to sign (encrypt) a piece of data, but
 anyone who has only the public key can verify (decrypt) it. The
 Bitcoin ledger keeps track of which keys are allowed to spend
 (i.e. sign over to another key) which Bitcoins. You transfer a Bitcoin
-to someone else by signing their /public/ key with your /private/ key,
+to someone else by signing their public key with your private key,
 and then adding that to the public ledger (more on how the ledger
 works shortly). Anyone looking at the ledger can see whether you are
 still entitled to make that transaction, or whether you've already
