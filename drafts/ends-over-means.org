@@ -1,0 +1,17 @@
+#+title: Ends over means
+
+Sometime last year I became interested in taking notes.
+
+It's an occupational hazard of programming that you spend most of your time thinking about means rather than ends, processes rather than products. Programming is more a tool than a pastime. 
+
+What is it I'm trying to say? There's a story about note-taking. Last year I stumbled across "Zettelkasten," a note-taking system employed by a German sociologist and much revered by note-taking nerds. This led me down a rabbithole on note-taking systems and software, some of which was interesting but none of which helped me very much in actually sitting down to take notes, or in later going back and re-reading the notes that I had taken.
+
+systems I tried:
+a single org file
+terminal velocity (notational velocity clone with CLI)
+deft-mode (terminal velocity for emacs)
+tiddlywiki
+actual index cards
+a bullet journal
+
+They all have something in common: my attention was drawn first by the tool or process, not by the results that the person using the tool got. The closest thing to results were people asserting that their note-taking process helped them, but the people writing about note-taking systems are rarely people who are doing interesting things.
