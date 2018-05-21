@@ -1,6 +1,6 @@
 a{text-decoration:none;color:#232;font-weight:bold}
 a:hover{text-decoration:underline}
-body{font:20px/1.3 Source Sans Pro, sans serif;color:#222;max-width:700px;margin:40px auto;padding:10px;background-color: #FEFFFE}
+body{font:16px/1.5 Merriweather, sans serif;color:#222;max-width:700px;margin:40px auto;padding:10px;background-color: #FEFFFE}
 p.date{font-style:italic}
 h1,h2,h3{line-height:1.2}
 h3.post-listing{display:inherit}

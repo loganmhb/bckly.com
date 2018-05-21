@@ -2,7 +2,7 @@ POST_SOURCES := $(wildcard posts/*)
 PAGES := site/moby-dick-poems.html site/about.html site/asteroids/index.html
 POSTS_HTML := $(POST_SOURCES:posts/%.markdown=site/posts/%.html)
 POSTS_HTML += $(POST_SOURCES:posts/%.org=site/posts/%.html)
-PANDOC_FLAGS := --to html5 --smart --template template.html
+PANDOC_FLAGS := --to html5+smart --template template.html
 
 site/index.html: $(POSTS_HTML) site/feed.xml site/main.css $(PAGES) gen.pl site/img template.html site/cv.pdf
 	./gen.pl index | pandoc $(PANDOC_FLAGS) -o $@
