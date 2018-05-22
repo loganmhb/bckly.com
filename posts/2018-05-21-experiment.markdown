@@ -1,5 +1,6 @@
 ---
 title: An Experiment
+date: May 21, 2018
 ---
 
 I've decided to try a little experiment: publishing something every day for thirty days, limiting the length of each post to between 150 and 300 words. I chose those particular constraints hoping that the post length will be long enough to allow me to ask a good question or begin exploring an idea, but short enough that I won't be able to publish free-writing dumps. The daily requirement is inspired by a couple of things, foremost my experience with twice attempting National Novel Writing Month (finishing once) and a daily memory drawing practice a friend of mine [maintained][memory] for a year.
