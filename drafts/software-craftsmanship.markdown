@@ -1,17 +1,10 @@
 ---
-title: Software Craftsmanship
+title: Software craftsmanship
+date: May 22, 2018
 ---
 
-What is it about software craftsmanship that bothers me?
+Programming is a strange trade. As a programmer you spend your days atop a giant tower of abstractions and interfaces. To me it often feels detached, maybe even fictitious somehow, and yet I am connected very directly to the results of my labor. In Marxian terms, programming is not very alienated. When your job is to automate things, everything left for you to do is done by hand.
 
-"artisanal Go application"
+I think I first heard the term "software craftsmanship" shortly after I began programming professionally. I found it immediately appealing -- it promised that this thing I was learning how to do might have some inherent aesthetic worth, that code I wrote might be beautiful and a worthy successor to the long and respectable traditions of other crafts.
 
-James Hague - programming in the small
-
-Programmers who call themselves software craftsmen are particularly likely to be consultants.
-
-Craftsmanship: "the quality of design and work shown in something made by hand"
-
-but software craftsmanship advocates typically focus on the _internals_ of the program. The software craftsmanship movement focuses on means over ends, on the beauty and function of the code itself rather than the beauty and function of the resulting program.
-
-is the code not the program?
+Now, a few years later, I catch myself feeling irritated at the language of software craftsmanship which I savored before -- "bespoke" or "artisanal" code seems to be missing a point. I enjoy my work and take pride in doing it well, but I think software craftsmanship as I usually see it expressed focuses on the internals of the software at the expense of the program itself. Maybe this is because the highest-profile proponents are consultants who have more control over the internals of what they're building than over what they are hired to build in the first place. People who use the programs I write don't care if the code is beautiful. They care if the program works. Striving for beautiful code feels like a self-interested concern, as if I were a woodworker taking pride in the beauty of my workshop instead of the pieces I make. It's nice to have a clean workshop, but it's not the point in the end.
