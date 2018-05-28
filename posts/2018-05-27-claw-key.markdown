@@ -1,0 +1,10 @@
+---
+title: Claws, Keys, Cloves
+date: May 27, 2018
+---
+
+Earlier tonight I was talking to my sister about the etymology of the word "enclave". I suspected that it derived from "clavis," the Latin word for key. According to [Etymology Online][etymonline], that's right, but the story doesn't stop there. There is a hypothesized Proto-Indo-European root, "klau-", which means something like a hook or a crooked branch and is the root of many other English words. Some on the list were ones I expected to find (clavichord, clef). Others were a bit more interesting but not exactly surprising -- "include" and "close", for example. Then there were a couple words whose presence on the list delighted me: "clove", the spice named apparently for the resemblence between its flower buds and nails; "clause", which is derived from the Latin word "claudere", "to conclude"; "cloying", which comes from a Middle English word meaning "to hinder movement" derived from a French word for driving a nail into a horse's hoof.
+
+There's no particular end here, but it's fun to pry words open like this and see where they came from. Sometimes they live double lives, like with "cloying" -- the meaning has drifted so far from the etymology that the word's origins and its definition seem to tell two different stories.
+
+[etymonline]: https://www.etymonline.com/word/enclave
