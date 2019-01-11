@@ -1,0 +1,40 @@
+#+TITLE: (wip) altruism for leftists
+
+Thinking over some left critiques of effective altruism.
+
+One in [[https://www.jacobinmag.com/2015/08/peter-singer-charity-effective-altruism/][Jacobin, "Against Charity"]], arguing that effective altruism accpets and (implicity) reinforces the framework of capitalism, I think.
+
+[[https://www.reddit.com/r/philosophy/comments/3idhu9/against_charity/][Reddit discussion of "Against Charity", with some interesting arguments and links]]
+
+[[https://www.lrb.co.uk/v37/n18/amia-srinivasan/stop-the-robot-apocalypse][A review]] of Doing Good Better, which criticizes it, mainly, for failing to criticize capitalism enough or consider alternatives
+
+"Qaly thinking frees us from considering the specificity of whom we are helping; marginal and counterfactual thinking frees us from the specificity of ourselves. What matters isn’t who does the good, only that good is done."
+
+"But the book’s snappy style isn’t just a strategic choice. MacAskill is evidently comfortable with ways of talking that are familiar from the exponents of global capitalism: the will to quantify, the essential comparability of all goods and all evils, the obsession with productivity and efficiency, the conviction that there is a happy convergence between self-interest and morality, the seeming confidence that there is no crisis whose solution is beyond the ingenuity of man."
+
+"That he speaks in the proprietary language of the illness – global inequality – whose symptoms he proposes to mop up is an irony on which he doesn’t comment." < this was a big source of discomfort for me, at least at first
+
+* Can we meaningfully distinguish between what actions are appropriate on an individual vs. collective level?
+
+  It's important to consider the context in which people advocating for effective altruism are working. You could frame the situation in a couple of different ways depending on how you feel about global capitalism. (examples?)
+
+Some arguments against effective altruism fail to take this into account. They refer to hypothetical situations in which charity motivated by effective altruist ideas holds much more power than it currently does, and argue that such a situation would be harmful because it would be better to put resources towards changing the forces which cause global inequality in the first place.
+
+(What /does/ cause global inequality? Are people in the developing world worse off now than they were four hundred years ago, or just not better off?)
+
+* Should the left abandon economics?
+* Aesthetics vs impact (revolutions are more fun to talk about than to live through, marginal change matters)
+
+* Winners Take All/how democratic is philanthropy?
+
+It seems to me like the answer depends a lot on the scale of the philanthropy, but that there might be a fundamental tradeoff between allocative efficiency and democratic control.
+
+[[https://www.jacobinmag.com/2018/02/charity-philanthropy-howard-buffett-congo][Jacobin article]] specifically discussing Howard Buffet's philanthropic efforts in the Congo
+
+* Propensity of philanthropic efforts to reinforce harmful aspects of the status quo
+
+I'll need to do some research on this, but it seems like there is a vast range here, not a general average -- for example, GiveDirectly probably has next to zero impact reinforcing the status quo, whereas rich philanthropists who give lots of money with market-oriented strings attach probably do more to reinforce the status quo than they ultimately do to help people.
+
+The implication is that this question is an important one to consider when evaluating a philanthropic project, but is not necessarily a weakness of philanthropy in general.
+
+Tentative conclusion? There is a legitimate critique to be made of effective altruism -- that it should seek to address the root causes of suffering in addition to the symptoms. But it does not erode the moral imperative of "the life you can save" -- only informs how you might want to go about doing that saving.
