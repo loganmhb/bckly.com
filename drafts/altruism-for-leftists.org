@@ -14,6 +14,14 @@ One in [[https://www.jacobinmag.com/2015/08/peter-singer-charity-effective-altru
 
 "That he speaks in the proprietary language of the illness – global inequality – whose symptoms he proposes to mop up is an irony on which he doesn’t comment." < this was a big source of discomfort for me, at least at first
 
+* About utilitarianism
+
+Peter Singer, whose ideas formed the basis of EA, is best known as a utilitarian philosopher.
+
+Clear definition of utilitarianism? Vs deontology, virtue ethics, etc
+
+There are many ways you could object to utilitarianism as a philosophy, and I would hesitate to describe myself at a utilitarian, but I don't think this detracts as much from the ideas of EA as you might expect (except the most extreme formulations).
+
 * Can we meaningfully distinguish between what actions are appropriate on an individual vs. collective level?
 
   It's important to consider the context in which people advocating for effective altruism are working. You could frame the situation in a couple of different ways depending on how you feel about global capitalism. (examples?)
@@ -23,6 +31,17 @@ Some arguments against effective altruism fail to take this into account. They r
 (What /does/ cause global inequality? Are people in the developing world worse off now than they were four hundred years ago, or just not better off?)
 
 * Should the left abandon economics?
+  (no, though they have good reason to examine economist's political claims with a healthy degree of skepticism)
+
+* the question of individualism
+
+EA advocates tend to speak uncritically on an individual level, asking "What impact can I have?" One criticism of this approach is that it avoids asking what systemic failures have lead to problems like global poverty and inequality in the first place, and whether systemic solutions might be available to solve them.
+
+I think there is a false dichotomy here. If effective altruism purported to offer a blueprint for how an entire society should function (which, to be fair, advocates do occasionally seem to do), then I think this would be a valid criticism. But we should avoid throwing the baby out with the bathwater when it comes to individualistic approaches. It would be as unreasonable to make your personal decisions based entirely on systemic factors as it is to criticize or praise an individual for their actions when systemc factors dominate individual ones. As a framework for diagnosing the ills of capitalism, effective altruism certainly falls short, but since it does not attempt to answer those questions it still offers value.
+
+
+is this really a false dichotomy, or just a little farther down one end of a spectrum?
+
 * Aesthetics vs impact (revolutions are more fun to talk about than to live through, marginal change matters)
 
 * Winners Take All/how democratic is philanthropy?
@@ -30,6 +49,10 @@ Some arguments against effective altruism fail to take this into account. They r
 It seems to me like the answer depends a lot on the scale of the philanthropy, but that there might be a fundamental tradeoff between allocative efficiency and democratic control.
 
 [[https://www.jacobinmag.com/2018/02/charity-philanthropy-howard-buffett-congo][Jacobin article]] specifically discussing Howard Buffet's philanthropic efforts in the Congo
+
+[[https://www.theatlantic.com/politics/archive/2014/10/is-philanthropy-good-for-democracy/381996/][2014 Atlantic article by a philanthropic director]] criticiziing big philanthropy:
+
+"Yet the collective leadership of American philanthropy—a leadership, by the way, that had been with few exceptions silent about the redistribution of wealth upward through the Bush tax cuts, silent about cuts in social programs, silent about the billions of dollars spent on the wars of the last decade—found its voice only when its tax exemption was threatened, and preferred to let the government go begging for revenue elsewhere, jeopardizing the prospects for health-care reform, in order to let rich, well-insured people go on shielding as much of their money as possible from taxation."
 
 * Propensity of philanthropic efforts to reinforce harmful aspects of the status quo
 
